@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path,include
+from shopperapp import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('/',include('shopperapp.urls')),
     path('accounts/',include('allauth.urls'))
 ]
