@@ -20,6 +20,8 @@ from shopperapp import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/',include('shopperapp.urls')),
+    path('',include('shopperapp.urls',namespace='shopperapp')),
     path('accounts/',include('allauth.urls'))
 ]
+# if settings.DEBUG:
+#     urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
