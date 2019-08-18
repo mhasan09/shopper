@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import item_list
+from .views import *
 app_name= 'shopperapp'
 urlpatterns = [
-    path('', item_list, name="item_list")
+    path('', HomeView.as_view(), name="item_list"),
+    path('product/<slug>/', ItemDetailView.as_view(), name="product")
 
 ]

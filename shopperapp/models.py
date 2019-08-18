@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.shortcuts import reverse
 # Create your models here.
 CATEGORY_CHOICES = (('S','Shirt'),('SW','Sport wear'),('OW','Outwear'))
 LABEL_CHOICES = (('P','Primary'),('S','Secondary'),('D','Danger'))
@@ -9,9 +10,14 @@ class ITEM(models.Model):
     price = models.FloatField()
     category = models.CharField(choices=CATEGORY_CHOICES,max_length=2)
     label = models.CharField(choices=LABEL_CHOICES,max_length=2)
+    slug = models.SlugField()
 
     def __str__(self):
         return self.title
+    def get_absoulute_url(self):
+        return reverse("shopperapp:product",kwargs={
+            'slug':self.slug
+        })
 
 class ORDER_ITEM(models.Model):
     item = models.ForeignKey(ITEM,on_delete=models.CASCADE)
