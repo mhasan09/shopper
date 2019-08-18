@@ -26,6 +26,8 @@ class ITEM(models.Model):
 
 
 class ORDER_ITEM(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ordered = models.BooleanField(default= False)
     item = models.ForeignKey(ITEM,on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 

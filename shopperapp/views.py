@@ -26,7 +26,9 @@ class ItemDetailView(DetailView):
 
 def add_to_cart(request,slug):
     item = get_object_or_404(ITEM,slug=slug)
-    order_item = ORDER_ITEM.objects.create(item=item)
+    order_item,created = ORDER_ITEM.objects.get_or_create(item=item,
+                                                  user=request.user,
+                                                  ordered=False)
     order_qs = ORDER.objects.filter(user=request.user,ordered = False)
     if order_qs.exists():
         order  = order_qs[0]
